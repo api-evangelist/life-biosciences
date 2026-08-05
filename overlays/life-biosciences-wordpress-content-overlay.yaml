@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Life Biosciences WordPress Content API
+  version: 1.0.0
+extends: openapi/life-biosciences-wordpress-content-openapi.yml
+x-generated: '2026-08-04'
+x-method: generated
+x-note: >-
+  Life Biosciences publishes no OpenAPI. The document this overlay extends is itself an API
+  Evangelist derivation from the site's WordPress route index. This overlay carries the assessment
+  layer — provenance, posture flags and artifact cross-links — separately from the derived contract
+  so the two never get confused.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provenance: >-
+      Derived by API Evangelist from https://www.lifebiosciences.com/wp-json/ on 2026-08-04. Not
+      published, endorsed or supported by Life Biosciences.
+    x-apievangelist-artifacts:
+      authentication: authentication/life-biosciences-authentication.yml
+      conventions: conventions/life-biosciences-conventions.yml
+      errors: errors/life-biosciences-problem-types.yml
+      data_model: data-model/life-biosciences-data-model.yml
+      examples: examples/life-biosciences-wordpress-content-examples.yml
+      lifecycle: lifecycle/life-biosciences-lifecycle.yml
+      conformance: conformance/life-biosciences-conformance.yml
+      llms: llms/life-biosciences-llms.txt
+    x-apievangelist-posture:
+      documented_by_provider: false
+      authentication: none
+      idempotency: false
+      rate_limits_published: false
+      status_page: false
+      deprecation_policy: false
+      sdks: false
+      mcp_server: false
+      agent_card: false
+- target: $.info
+  update:
+    x-agentic-access:
+      action-class: connected
+      consequence: read
+      audience: null
+      note: >-
+        Every operation in this document is a safe, anonymous GET over published corporate content.
+        No write, no consequence beyond read. Agents should respect the site's robots.txt
+        Crawl-delay of 10 seconds and the 10-minute cache window on REST responses.
+- target: $.servers
+  update:
+  - url: https://www.lifebiosciences.com/wp-json
+    description: Production
+    x-verified: '2026-08-04'
+- target: $.paths['/wp/v2/posts'].get
+  update:
+    x-apievangelist-note: >-
+      This is the company's press-release corpus (17 records at derivation, all in the "Press
+      Release" category, id 3). The same content is syndicated as RSS at /feed/ and /news/feed/,
+      which is the cheaper polling surface for change detection.
+- target: $.paths['/wp/v2/search'].get
+  update:
+    x-apievangelist-note: >-
+      Returns a light projection {id, title, url, type, subtype} plus a HAL `_links.self` to the full
+      record — two requests to get full content. Use `_embed` on the follow-up.
+- target: $.components.schemas.Error
+  update:
+    x-apievangelist-note: >-
+      Not RFC 9457. A consumer expecting application/problem+json will mis-parse every failure. See
+      errors/life-biosciences-problem-types.yml for the five codes observed live.

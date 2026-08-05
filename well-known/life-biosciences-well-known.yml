@@ -1,0 +1,36 @@
+generated: '2026-08-04'
+method: probed
+source: live HTTP probes
+note: >-
+  Probed both www.lifebiosciences.com and lifebiosciences.com. No /.well-known/ document is served —
+  every path returns the WordPress 404 HTML page. Absence is the recorded result; no file was saved
+  and no SecurityTxt pointer is emitted. The non-well-known discovery documents that DO exist are
+  recorded under `discovery_found` below.
+host: https://www.lifebiosciences.com
+documents:
+- {path: /.well-known/security.txt, status: 404, content_type: text/html}
+- {path: /.well-known/openid-configuration, status: 404, content_type: text/html}
+- {path: /.well-known/oauth-authorization-server, status: 404, content_type: text/html}
+- {path: /.well-known/api-catalog, status: 404, content_type: text/html}
+- {path: /.well-known/ai-plugin.json, status: 404, content_type: text/html}
+- {path: /.well-known/agent-card.json, status: 404, content_type: text/html}
+- {path: /.well-known/agent.json, status: 404, content_type: text/html}
+apex_host:
+  host: https://lifebiosciences.com
+  result: identical — all seven paths return 404 text/html
+spec_probes:
+  note: Contract discovery run against the apex, www and the API base host.
+  paths:
+  - {path: /openapi.json, status: 404}
+  - {path: /openapi.yaml, status: 404}
+  - {path: /swagger.json, status: 404}
+  - {path: /api-docs, status: 404}
+  subdomains_resolved: false
+  subdomains_checked: [api, docs, developer, developers, status, trust, security, portal, app]
+discovery_found:
+- {path: /wp-json/, status: 200, content_type: application/json, format: WordPress REST route index, file: '../openapi/_original/life-biosciences-wp-json-index.json'}
+- {path: /robots.txt, status: 200, content_type: text/plain}
+- {path: /sitemap_index.xml, status: 200, content_type: text/xml}
+- {path: /feed/, status: 200, content_type: application/rss+xml}
+- {path: /news/feed/, status: 200, content_type: application/rss+xml}
+- {path: /wp-json/oembed/1.0/embed, status: 200, content_type: application/json, format: oEmbed 1.0}

@@ -1,0 +1,57 @@
+generated: '2026-08-04'
+method: probed
+source: https://www.lifebiosciences.com/wp-json/wp/v2/
+api: Life Biosciences WordPress Content API
+format: wordpress-rest
+rfc9457: false
+envelope:
+  content_type: application/json
+  fields:
+  - {name: code, type: string, meaning: machine-readable error code}
+  - {name: message, type: string, meaning: human-readable message}
+  - {name: data.status, type: integer, meaning: HTTP status code, repeated in the body}
+  - {name: data.params, type: object, meaning: 'per-parameter validation messages (400 only)'}
+  - {name: data.details, type: object, meaning: 'per-parameter nested error objects (400 only)'}
+  note: >-
+    Life Biosciences publishes no error reference. Every entry below was observed live against the
+    production host on 2026-08-04; nothing here is inferred.
+problems:
+- code: rest_no_route
+  status: 404
+  title: No route was found matching the URL and request method
+  remediation: Check the namespace and path against the route index at /wp-json/.
+  observed_at: https://www.lifebiosciences.com/wp-json/wp/v2/nope
+  body: '{"code":"rest_no_route","message":"No route was found matching the URL and request method.","data":{"status":404}}'
+- code: rest_post_invalid_id
+  status: 404
+  title: Invalid post ID
+  remediation: The id does not resolve to a published post; list /wp/v2/posts to obtain valid ids.
+  source_operation: openapi/life-biosciences-wordpress-content-openapi.yml#getPost
+  observed_at: https://www.lifebiosciences.com/wp-json/wp/v2/posts/99999999
+  body: '{"code":"rest_post_invalid_id","message":"Invalid post ID.","data":{"status":404}}'
+- code: rest_invalid_param
+  status: 400
+  title: Invalid parameter(s)
+  remediation: >-
+    Correct the named parameter; `data.params` and `data.details` name each offending parameter and
+    the constraint it violated (e.g. per_page must be between 1 and 100 inclusive).
+  source_operation: openapi/life-biosciences-wordpress-content-openapi.yml#listPosts
+  observed_at: https://www.lifebiosciences.com/wp-json/wp/v2/posts?per_page=999
+  body: '{"code":"rest_invalid_param","message":"Invalid parameter(s): per_page","data":{"status":400,"params":{"per_page":"per_page must be between 1 (inclusive) and 100 (inclusive)"}}}'
+- code: rest_out_of_bounds
+  status: 400
+  title: Parameter out of bounds
+  remediation: Nested detail code returned inside data.details for a numeric parameter outside its declared range.
+  observed_at: https://www.lifebiosciences.com/wp-json/wp/v2/posts?per_page=999
+- code: rest_user_cannot_view
+  status: 401
+  title: Sorry, you are not allowed to list users
+  remediation: >-
+    Privileged read; no anonymous access. Life Biosciences issues no credentials for this API, so
+    this surface is effectively closed to the public.
+  observed_at: https://www.lifebiosciences.com/wp-json/wp/v2/users
+  body: '{"code":"rest_user_cannot_view","message":"Sorry, you are not allowed to list users.","data":{"status":401}}'
+gaps:
+- >-
+  No published error reference, no error taxonomy, no remediation guidance and no RFC 9457
+  problem+json. Any consumer must learn the error surface by probing it, as this catalogue did.

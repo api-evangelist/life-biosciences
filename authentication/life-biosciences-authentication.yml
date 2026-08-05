@@ -1,0 +1,41 @@
+generated: '2026-08-04'
+method: probed
+source: https://www.lifebiosciences.com/wp-json/
+api: Life Biosciences WordPress Content API
+summary:
+  types: [none]
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    The read surface requires no credential of any kind. The site's own discovery document reports
+    `"authentication": []` — no authentication scheme is advertised — and every collection and item
+    route captured in openapi/life-biosciences-wordpress-content-openapi.yml answers HTTP 200
+    anonymously. There is no signup, no API key, no OAuth and no developer program.
+schemes: []
+anonymous_access:
+  supported: true
+  scope: >-
+    Published content only: posts (press releases), pages, media, categories, tags, comments, site
+    search, oEmbed and the type/taxonomy/status discovery endpoints.
+  evidence:
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/posts?per_page=1', http_status: 200, fetched: '2026-08-04'}
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/pages?per_page=1', http_status: 200, fetched: '2026-08-04'}
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/search?search=ER-100', http_status: 200, fetched: '2026-08-04'}
+gated_surface:
+  note: >-
+    WordPress core advertises write methods and privileged reads in the same discovery document, but
+    they are not available anonymously on this host and are deliberately excluded from the OpenAPI.
+    Where writes are permitted at all they use standard WordPress credentials (cookie + X-WP-Nonce
+    for same-origin, or Application Passwords over HTTP Basic) — Life Biosciences documents neither,
+    and no public credential issuance exists.
+  observed:
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/users', http_status: 401, code: rest_user_cannot_view}
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp-abilities/v1/abilities', http_status: 401, note: 'WordPress Abilities API present but auth-gated; agent tool schemas cannot be introspected anonymously.'}
+  accepted_headers:
+    note: Advertised via access-control-allow-headers on the REST responses.
+    headers: [Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type]
+transport:
+  https: true
+  tls_version: TLSv1.3
+  hsts: false
+  artifact: security/life-biosciences-domain-security.yml

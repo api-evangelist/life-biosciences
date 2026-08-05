@@ -1,0 +1,90 @@
+generated: '2026-08-04'
+method: probed
+source: https://www.lifebiosciences.com/wp-json/
+api: Life Biosciences WordPress Content API
+scope: >-
+  Cross-cutting request/response semantics observed live against
+  https://www.lifebiosciences.com/wp-json. Every value below was read from a real response — none is
+  documented by Life Biosciences, which publishes no API documentation.
+authentication:
+  style: none
+  detail: Anonymous read. See authentication/life-biosciences-authentication.yml.
+pagination:
+  style: page-number
+  params:
+  - {name: page, default: 1, note: 1-based page index}
+  - {name: per_page, default: 10, minimum: 1, maximum: 100, note: 'Out-of-range values return 400 rest_invalid_param'}
+  - {name: offset, note: Alternative absolute offset, available on posts/pages/media/comments}
+  response_headers:
+  - {name: X-WP-Total, meaning: total matching records}
+  - {name: X-WP-TotalPages, meaning: total pages available}
+  - {name: Link, meaning: 'RFC 8288 rel="next" / rel="prev" links'}
+  cors_exposed: [X-WP-Total, X-WP-TotalPages, Link]
+  evidence:
+  - {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/posts?per_page=2&page=1', observed: 'x-wp-total: 17, x-wp-totalpages: 9, link rel=next'}
+sparse_fieldsets:
+  supported: true
+  param: _fields
+  detail: Comma-separated allow-list of top-level response fields, e.g. `_fields=id,date,link,title`.
+embedding:
+  supported: true
+  param: _embed
+  detail: Inlines linked resources (author, terms, featured media) under `_embedded`; HAL-style `_links` are present on every record by default.
+filtering_and_ordering:
+  params: [search, after, before, modified_after, modified_before, slug, status, categories, categories_exclude, tags, tags_exclude, order, orderby, include, exclude, sticky]
+  detail: Copied from the declared `args` of each route in the discovery document; see the OpenAPI parameters.
+search:
+  endpoint: /wp/v2/search
+  detail: Cross-type search returning {id, title, url, type, subtype} plus `_links.self` to the full record.
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  detail: >-
+    Version is the WordPress REST namespace segment (`/wp-json/wp/v2/...`). Namespaces advertised by
+    this host include wp/v2, oembed/1.0, wp-site-health/v1, wp-block-editor/v1, wp-abilities/v1 plus
+    plugin namespaces (yoast/v1, wordfence/v1, cookieyes/v1, cky/v1, aiarc/v1, wpe/cache-plugin/v1,
+    wpe_sign_on_plugin/v1). Only wp/v2 and oembed/1.0 are anonymously readable content routes.
+  policy_published: false
+error_envelope:
+  format: wordpress-rest
+  rfc9457: false
+  content_type: application/json
+  shape: '{"code": "<machine_code>", "message": "<human message>", "data": {"status": <http_status>}}'
+  detail: >-
+    Not RFC 9457 problem+json. Validation failures add `data.params` and `data.details` keyed by
+    parameter name. Catalogued in errors/life-biosciences-problem-types.yml.
+idempotency:
+  supported: false
+  detail: >-
+    No idempotency contract. The public surface is read-only (`allow: GET` on the collections), so
+    there is no unsafe method to make idempotent and no Idempotency-Key header is accepted or
+    documented. No `type: Idempotency` pointer is emitted for this provider.
+request_tracing:
+  request_id_header: null
+  detail: No request-id or correlation header is returned.
+rate_limiting:
+  documented: false
+  headers_observed: []
+  detail: >-
+    No rate-limit headers are returned and no policy is published. robots.txt requests a
+    `Crawl-delay: 10` for site crawling, which is a crawler courtesy directive, not an API limit.
+  crawl_delay_seconds: 10
+caching:
+  cache_control: 'max-age=600, must-revalidate'
+  x_robots_tag: noindex
+  detail: REST responses are cached for 10 minutes at the edge (WP Engine) and marked noindex.
+cors:
+  allow_headers: [Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type]
+  expose_headers: [X-WP-Total, X-WP-TotalPages, Link]
+syndication:
+  detail: The same content is also published as RSS 2.0 feeds, which are the practical change-notification surface.
+  feeds:
+  - {url: 'https://www.lifebiosciences.com/feed/', status: 200, format: RSS 2.0}
+  - {url: 'https://www.lifebiosciences.com/news/feed/', status: 200, format: RSS 2.0}
+  - {url: 'https://www.lifebiosciences.com/sitemap_index.xml', status: 200, format: sitemaps.org XML}
+cross_links:
+  authentication: authentication/life-biosciences-authentication.yml
+  errors: errors/life-biosciences-problem-types.yml
+  lifecycle: lifecycle/life-biosciences-lifecycle.yml
+  data_model: data-model/life-biosciences-data-model.yml
+  openapi: openapi/life-biosciences-wordpress-content-openapi.yml

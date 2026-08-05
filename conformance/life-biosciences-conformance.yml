@@ -1,0 +1,76 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/life-biosciences-wordpress-content-openapi.yml, live probes of https://www.lifebiosciences.com
+api: Life Biosciences WordPress Content API
+note: >-
+  Life Biosciences makes no compliance or standards claim anywhere on its public site — there is no
+  trust center, no certification page and no security page. No `Compliance` pointer is emitted.
+  Entries below are derived from what the surface actually does.
+standards:
+- id: openapi
+  conforms: false
+  evidence: >-
+    The provider publishes no OpenAPI. The description in openapi/ is an API Evangelist derivation
+    from the site's WordPress route index, not a provider artifact.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security scheme; /.well-known/oauth-authorization-server returns 404.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use the WordPress envelope {code,message,data.status} with content-type application/json,
+    not application/problem+json.
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: 'Collection responses return a Link header with rel="next"/rel="prev" (observed on /wp/v2/posts).'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on both apex and www.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: No /.well-known/ document of any kind is served.
+- id: oembed-1.0
+  conforms: true
+  evidence: /wp-json/oembed/1.0/embed returns 200 and the oembed/1.0 namespace is advertised in the route index.
+- id: rss-2.0
+  conforms: true
+  evidence: '/feed/ and /news/feed/ return 200 application/rss+xml.'
+- id: sitemaps.org
+  conforms: true
+  evidence: /sitemap_index.xml returns 200 text/xml and is declared in robots.txt.
+- id: cors
+  conforms: true
+  evidence: 'access-control-expose-headers: X-WP-Total, X-WP-TotalPages, Link on REST responses.'
+- id: tls-1.3
+  conforms: true
+  evidence: TLSv1.3 negotiated; see security/life-biosciences-domain-security.yml.
+- id: hsts
+  conforms: false
+  evidence: No Strict-Transport-Security header on www.lifebiosciences.com.
+- id: dnssec
+  conforms: false
+  evidence: No DNSSEC on lifebiosciences.com.
+- id: dmarc
+  conforms: true
+  evidence: DMARC record present with policy quarantine.
+- id: a2a
+  conforms: false
+  evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json.
+- id: mcp
+  conforms: false
+  evidence: No hosted or remote MCP server found in docs, GitHub, npm or the public MCP registries.
+- id: llmstxt
+  conforms: false
+  evidence: /llms.txt returns 404.
+regulatory_context:
+  note: >-
+    Life Biosciences is a US clinical-stage biopharmaceutical company; its regulated surface is FDA
+    IND/clinical conduct, not an API. Nothing in the public web surface carries PHI or is subject to
+    HIPAA as published. The corporate site runs a cookie-consent platform (CookieYes) and publishes a
+    privacy policy and terms of use.
+  references:
+  - https://www.lifebiosciences.com/privacy-policy/
+  - https://www.lifebiosciences.com/terms-of-use/

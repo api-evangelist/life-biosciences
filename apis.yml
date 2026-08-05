@@ -1,23 +1,149 @@
 aid: life-biosciences
 name: Life Biosciences
-description: 'Life Biosciences is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+x-enrichment:
+  date: '2026-08-04'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+description: >-
+  Life Biosciences is a Boston-based, clinical-stage biotechnology company developing therapeutics
+  that target the biology of aging. Its platform — which the company calls epigenetic restoration,
+  a partial epigenetic reprogramming (PER) approach using the OCT4, SOX2 and KLF4 transcription
+  factors — is designed to return older and damaged cells to a younger, healthier functional state.
+  Its lead program, ER-100, is in a Phase 1 first-in-human study in optic neuropathies (open-angle
+  glaucoma and non-arteritic anterior ischemic optic neuropathy) following FDA clearance of the IND
+  in January 2026, with a preclinical program in metabolic dysfunction-associated steatohepatitis
+  (MASH) behind it. The company is privately held, has raised an $80M Series D, and trades on
+  secondary markets. Life Biosciences publishes no developer program, API documentation or SDKs;
+  the only machine-readable surface reachable on its corporate site is the read-only WordPress REST
+  content API, which serves its press releases, pages, media and taxonomies as JSON.
 url: https://raw.githubusercontent.com/api-evangelist/life-biosciences/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profile
+x-tier-reason: enriched-from-harvest-lead
+accessModel:
+  pricing: none
+  onboarding: none
+  trial: false
+  try_now: true
+  public: true
+  label: Public read-only content API, no signup
+  confidence: high
+  source:
+  - authentication
+  generated: '2026-08-04'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-08-04'
 modified: '2026-08-04'
+image: https://www.lifebiosciences.com/wp-content/uploads/2022/01/Life-Biosciences-Logo.png
 tags:
 - Company
-apis: []
+- Biotechnology
+- Life Sciences
+- Pharmaceuticals
+- Clinical Trials
+- Longevity
+- Aging
+- Gene Therapy
+- Ophthalmology
+- Content
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: life-biosciences:life-biosciences-wordpress-content-api
+  name: Life Biosciences WordPress Content API
+  description: >-
+    The read-only content API served anonymously by the WordPress REST API on the Life Biosciences
+    corporate site. Sixteen verified GET operations expose press releases and news posts, pages
+    (platform, pipeline, leadership, policies), media attachments, categories and tags, site search
+    and oEmbed. Not a product API and not documented by Life Biosciences — described by API
+    Evangelist from the site's own machine-readable route discovery document at /wp-json/.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Content
+  - News
+  - WordPress
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-wordpress-content-openapi.yml
+  - type: Overlay
+    url: overlays/life-biosciences-wordpress-content-overlay.yaml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+  - type: MCPServer
+    url: mcp/life-biosciences-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
 common:
 - type: Website
+  url: https://www.lifebiosciences.com/
+- type: SecondaryMarket
   url: https://forgeglobal.com/life-biosciences_stock/
+- type: About
+  url: https://www.lifebiosciences.com/about-us/about-life-biosciences/
+- type: Blog
+  url: https://www.lifebiosciences.com/news/
+- type: BlogRSS
+  url: https://www.lifebiosciences.com/feed/
+- type: PressReleases
+  url: https://www.lifebiosciences.com/news/press-releases/
+- type: Contact
+  url: https://www.lifebiosciences.com/contact/
+- type: Careers
+  url: https://www.lifebiosciences.com/join-us/
+- type: TermsOfService
+  url: https://www.lifebiosciences.com/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.lifebiosciences.com/privacy-policy/
+- type: Accessibility
+  url: https://www.lifebiosciences.com/accessibility-policy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/lifebiosciences
+- type: Publications
+  url: https://www.lifebiosciences.com/our-platform/publications/
+- type: Pipeline
+  url: https://www.lifebiosciences.com/pipeline/
+- type: Sitemap
+  url: https://www.lifebiosciences.com/sitemap_index.xml
+- type: Robots
+  url: https://www.lifebiosciences.com/robots.txt
+- type: Authentication
+  url: authentication/life-biosciences-authentication.yml
+- type: Conventions
+  url: conventions/life-biosciences-conventions.yml
+- type: ErrorCatalog
+  url: errors/life-biosciences-problem-types.yml
+- type: DataModel
+  url: data-model/life-biosciences-data-model.yml
+- type: Examples
+  url: examples/life-biosciences-wordpress-content-examples.yml
+- type: Conformance
+  url: conformance/life-biosciences-conformance.yml
+- type: Lifecycle
+  url: lifecycle/life-biosciences-lifecycle.yml
+- type: WellKnown
+  url: well-known/life-biosciences-well-known.yml
+- type: DomainSecurity
+  url: security/life-biosciences-domain-security.yml
+- type: LLMsTxt
+  url: llms/life-biosciences-llms.txt
+- type: MCPServer
+  url: mcp/life-biosciences-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/life-biosciences-wordpress-content-overlay.yaml

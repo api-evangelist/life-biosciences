@@ -1,0 +1,50 @@
+generated: '2026-08-04'
+method: probed
+source: https://www.lifebiosciences.com/wp-json/, live probes
+api: Life Biosciences WordPress Content API
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  docs: null
+  detail: >-
+    The version is the WordPress REST namespace (`/wp-json/wp/v2/`). It moves with the site's
+    WordPress core version, which Life Biosciences does not announce. Consumers get no advance
+    notice of a namespace change.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  detail: No deprecation policy, no RFC 8594 Sunset/Deprecation headers observed.
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page:
+  url: null
+  published: false
+  probed: [status.lifebiosciences.com]
+  detail: No status page. status.lifebiosciences.com does not resolve. No StatusPage pointer is emitted.
+support:
+  url: https://www.lifebiosciences.com/contact/
+  detail: >-
+    A general corporate contact form. There is no developer support channel, forum, community or
+    issue tracker.
+change_communication:
+  api_changelog: false
+  detail: >-
+    There is no API changelog. Corporate news is published as WordPress posts and syndicated over
+    RSS — that feed is the only change signal a consumer can subscribe to, and it covers the company,
+    not the API.
+  feeds:
+  - https://www.lifebiosciences.com/feed/
+  - https://www.lifebiosciences.com/news/feed/
+  latest_post_observed: {date: '2026-06-09', title: Life Biosciences Announces First Patient Dosed in Phase 1 Trial of ER-100 for Optic Neuropathies}
+company_lifecycle:
+  note: Non-API lifecycle context, from the company's own pages.
+  stage: clinical-stage
+  lead_program: {name: ER-100, indications: [open-angle glaucoma, non-arteritic anterior ischemic optic neuropathy], phase: Phase 1, ind_cleared: '2026-01-15', first_patient_dosed: '2026-06-09'}
+  preclinical: [{program: metabolic liver disease, indication: MASH}]
+  funding: {round: Series D, amount_usd: 80000000, announced: '2026-04-08'}
+  source: https://www.lifebiosciences.com/pipeline/

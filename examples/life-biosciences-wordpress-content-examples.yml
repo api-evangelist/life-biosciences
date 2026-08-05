@@ -1,0 +1,48 @@
+generated: '2026-08-04'
+method: probed
+source: https://www.lifebiosciences.com/wp-json/wp/v2/
+api: Life Biosciences WordPress Content API
+note: >-
+  Real responses fetched from the production host on 2026-08-04, trimmed with the `_fields` parameter
+  for readability. Values are verbatim; nothing is synthesized.
+examples:
+- operationId: listPosts
+  request: 'GET https://www.lifebiosciences.com/wp-json/wp/v2/posts?per_page=1&_fields=id,date,slug,link,title,categories,tags,type,status'
+  http_status: 200
+  response_headers: {x-wp-total: 17, x-wp-totalpages: 17, cache-control: 'max-age=600, must-revalidate'}
+  response:
+  - id: 1076
+    date: '2026-06-09T11:18:52'
+    slug: life-biosciences-announces-first-patient-dosed-in-phase-1-trial-of-er-100-for-optic-neuropathies
+    status: publish
+    type: post
+    link: https://www.lifebiosciences.com/life-biosciences-announces-first-patient-dosed-in-phase-1-trial-of-er-100-for-optic-neuropathies/
+    title:
+      rendered: "Life Biosciences Announces First Patient Dosed in Phase 1 Trial of ER‑100 for Optic Neuropathies"
+    categories: [3]
+    tags: []
+- operationId: listCategories
+  request: 'GET https://www.lifebiosciences.com/wp-json/wp/v2/categories?per_page=10&_fields=id,count,name,slug,taxonomy,link'
+  http_status: 200
+  response:
+  - {id: 3, count: 17, name: Press Release, slug: press-release, taxonomy: category, link: 'https://www.lifebiosciences.com/category/press-release/'}
+  - {id: 1, count: 0, name: Uncategorized, slug: uncategorized, taxonomy: category, link: 'https://www.lifebiosciences.com/category/uncategorized/'}
+- operationId: search
+  request: 'GET https://www.lifebiosciences.com/wp-json/wp/v2/search?search=ER-100&per_page=3'
+  http_status: 200
+  response:
+  - {id: 943, title: Optic Neuropathies and ER-100, url: 'https://www.lifebiosciences.com/optic-neuropathies-er-100/', type: post, subtype: page}
+  - {id: 938, title: Life Biosciences Announces FDA Clearance of IND Application for ER-100 in Optic Neuropathies, url: 'https://www.lifebiosciences.com/life-biosciences-announces-fda-clearance-of-ind-application-for-er-100-in-optic-neuropathies/', type: post, subtype: post}
+  - {id: 1076, title: "Life Biosciences Announces First Patient Dosed in Phase 1 Trial of ER‑100 for Optic Neuropathies", url: 'https://www.lifebiosciences.com/life-biosciences-announces-first-patient-dosed-in-phase-1-trial-of-er-100-for-optic-neuropathies/', type: post, subtype: post}
+- operationId: listTypes
+  request: GET https://www.lifebiosciences.com/wp-json/wp/v2/types
+  http_status: 200
+  response_summary:
+    types: [post, page, attachment, nav_menu_item, wp_block, wp_template, wp_template_part, wp_global_styles, wp_navigation, wp_font_family, wp_font_face]
+    note: Stock WordPress types only — no custom post type for pipeline programs, publications or trials.
+- operationId: getPost
+  request: GET https://www.lifebiosciences.com/wp-json/wp/v2/posts/99999999
+  http_status: 404
+  response: {code: rest_post_invalid_id, message: Invalid post ID., data: {status: 404}}
+error_examples:
+  artifact: errors/life-biosciences-problem-types.yml

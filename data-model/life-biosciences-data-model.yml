@@ -1,0 +1,79 @@
+generated: '2026-08-04'
+method: derived
+source: openapi/life-biosciences-wordpress-content-openapi.yml
+evidence:
+- {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/types', http_status: 200, fetched: '2026-08-04'}
+- {url: 'https://www.lifebiosciences.com/wp-json/wp/v2/taxonomies', http_status: 200, fetched: '2026-08-04'}
+api: Life Biosciences WordPress Content API
+note: >-
+  Entity graph derived from the content types and taxonomies the site itself reports, plus the
+  id-reference fields present on the live records. Only the anonymously readable entities are
+  modelled. The site runs stock WordPress content types — it registers no custom post type for
+  pipeline programs, publications or clinical trials, so those live inside page HTML rather than as
+  addressable entities.
+entities:
+- name: post
+  rest_base: posts
+  path: /wp/v2/posts
+  description: >-
+    Press releases and news items. 17 records at time of derivation, all in the "Press Release"
+    category.
+  identifier: id (integer)
+  key_fields: [id, date, date_gmt, modified, slug, status, type, link, title.rendered, content.rendered, excerpt.rendered, author, featured_media, categories, tags]
+- name: page
+  rest_base: pages
+  path: /wp/v2/pages
+  description: >-
+    Static site pages — Our Platform, Targeting the Biology of Aging, Publications, Pipeline, Optic
+    Neuropathies and ER-100, About Us, Leadership, Board of Directors, Scientific Advisory Board,
+    Co-Founders, News, Press Releases, In the Media, Contact, Join Us, Terms of Use, Privacy Policy,
+    Accessibility Policy, Conflict of Interest.
+  identifier: id (integer)
+  key_fields: [id, date, modified, slug, status, type, link, title.rendered, content.rendered, parent, menu_order, featured_media]
+- name: attachment
+  rest_base: media
+  path: /wp/v2/media
+  description: Media library items (images, PDFs) referenced by posts and pages.
+  identifier: id (integer)
+  key_fields: [id, date, slug, link, title.rendered, media_type, mime_type, source_url, post, alt_text]
+- name: category
+  rest_base: categories
+  taxonomy: category
+  path: /wp/v2/categories
+  description: 'Post categories. Observed: Press Release (id 3, 17 posts), Uncategorized (id 1, 0 posts).'
+  identifier: id (integer)
+  key_fields: [id, count, name, slug, parent, taxonomy, link]
+- name: tag
+  rest_base: tags
+  taxonomy: post_tag
+  path: /wp/v2/tags
+  description: Post tags. Unused on the observed corpus.
+  identifier: id (integer)
+- name: comment
+  rest_base: comments
+  path: /wp/v2/comments
+  description: Approved comments. Empty on the observed corpus.
+  identifier: id (integer)
+- name: search_result
+  rest_base: search
+  path: /wp/v2/search
+  description: Cross-type search projection over posts and pages.
+  key_fields: [id, title, url, type, subtype, _links.self]
+relationships:
+- {from: post, to: category, kind: has_many, via: categories, note: array of category ids}
+- {from: post, to: tag, kind: has_many, via: tags, note: array of tag ids}
+- {from: post, to: attachment, kind: has_one, via: featured_media, note: media id, 0 when unset}
+- {from: post, to: user, kind: belongs_to, via: author, note: 'author id; the users collection is 401-gated, so the referent is not resolvable anonymously'}
+- {from: page, to: page, kind: belongs_to, via: parent, note: 'page hierarchy, e.g. /news/press-releases/ under /news/'}
+- {from: page, to: attachment, kind: has_one, via: featured_media}
+- {from: attachment, to: post, kind: belongs_to, via: post, note: attaching post/page id}
+- {from: category, to: category, kind: belongs_to, via: parent}
+- {from: comment, to: post, kind: belongs_to, via: post}
+- {from: search_result, to: post, kind: has_one, via: _links.self, note: HAL link to the full record}
+traversal:
+  detail: >-
+    Every record carries a HAL-style `_links` block; `?_embed` inlines author, terms and featured
+    media in one request, which is the cheapest way to walk the graph.
+gaps:
+- No custom post types for pipeline programs, publications, clinical trials, leadership or press coverage — those are unstructured page HTML.
+- The `author` reference cannot be dereferenced anonymously (users collection returns 401).

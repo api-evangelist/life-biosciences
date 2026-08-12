@@ -55,25 +55,16 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: life-biosciences:life-biosciences-wordpress-content-api
-  name: Life Biosciences WordPress Content API
-  description: >-
-    The read-only content API served anonymously by the WordPress REST API on the Life Biosciences
-    corporate site. Sixteen verified GET operations expose press releases and news posts, pages
-    (platform, pipeline, leadership, policies), media attachments, categories and tags, site search
-    and oEmbed. Not a product API and not documented by Life Biosciences — described by API
-    Evangelist from the site's own machine-readable route discovery document at /wp-json/.
+- aid: life-biosciences:life-biosciences-comments-api
+  name: Life Biosciences Comments API
+  description: The Comments API from Life Biosciences — 1 operation(s) for comments.
   humanURL: https://www.lifebiosciences.com/news/
   baseURL: https://www.lifebiosciences.com/wp-json
   tags:
-  - Content
-  - News
-  - WordPress
+  - Comments
   properties:
   - type: OpenAPI
-    url: openapi/life-biosciences-wordpress-content-openapi.yml
-  - type: Overlay
-    url: overlays/life-biosciences-wordpress-content-overlay.yaml
+    url: openapi/life-biosciences-comments-api-openapi.yml
   - type: Authentication
     url: authentication/life-biosciences-authentication.yml
   - type: Conventions
@@ -84,10 +75,146 @@ apis:
     url: data-model/life-biosciences-data-model.yml
   - type: Examples
     url: examples/life-biosciences-wordpress-content-examples.yml
-  - type: MCPServer
-    url: mcp/life-biosciences-mcp.yml
-  - type: AgentSkill
-    url: skills/_index.yml
+- aid: life-biosciences:life-biosciences-discovery-api
+  name: Life Biosciences Discovery API
+  description: The Discovery API from Life Biosciences — 3 operation(s) for discovery.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-discovery-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-media-api
+  name: Life Biosciences Media API
+  description: The Media API from Life Biosciences — 2 operation(s) for media.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-media-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-oembed-api
+  name: Life Biosciences O Embed API
+  description: The oEmbed API from Life Biosciences — 1 operation(s) for oembed.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - oEmbed
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-oembed-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-pages-api
+  name: Life Biosciences Pages API
+  description: The Pages API from Life Biosciences — 2 operation(s) for pages.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-pages-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-posts-api
+  name: Life Biosciences Posts API
+  description: The Posts API from Life Biosciences — 2 operation(s) for posts.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-posts-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-search-api
+  name: Life Biosciences Search API
+  description: The Search API from Life Biosciences — 1 operation(s) for search.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-search-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-taxonomies-api
+  name: Life Biosciences Taxonomies API
+  description: The Taxonomies API from Life Biosciences — 4 operation(s) for taxonomies.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - Taxonomies
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-taxonomies-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
 common:
 - type: Website
   url: https://www.lifebiosciences.com/

@@ -34,7 +34,7 @@ accessModel:
   - authentication
   generated: '2026-08-04'
   method: derived
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-08-04'
 modified: '2026-08-04'
 image: https://www.lifebiosciences.com/wp-content/uploads/2022/01/Life-Biosciences-Logo.png

@@ -1,0 +1,261 @@
+openapi: 3.2.0
+info:
+  title: Life Biosciences WordPress Content Comments API
+  version: wp/v2
+  description: 'Read-only content API served anonymously by the WordPress REST API on the Life Biosciences corporate site (www.lifebiosciences.com). It exposes the company''s press releases, news posts, pages (platform, pipeline, leadership, policies), media, taxonomies and site search as JSON.
+
+
+    This is NOT a product API and Life Biosciences publishes no developer program, documentation or SDKs for it. API Evangelist derived this description from the site''s own machine-readable route discovery document at https://www.lifebiosciences.com/wp-json/ (saved verbatim at openapi/_original/life-biosciences-wp-json-index.json). Every path, method and parameter below is copied from that document; only routes verified to answer HTTP 200 anonymously are included. Write methods advertised by WordPress core require authentication and are intentionally omitted.'
+  contact:
+    name: Life Biosciences, Inc.
+    url: https://www.lifebiosciences.com/contact/
+  x-evidence:
+    fetched: '2026-08-04'
+    url: https://www.lifebiosciences.com/wp-json/
+    http_status: 200
+    content_type: application/json
+    note: Derived from the live route discovery document; not published by Life Biosciences as OpenAPI.
+servers:
+- url: https://www.lifebiosciences.com/wp-json
+  description: Production
+tags:
+- name: Comments
+paths:
+  /wp/v2/comments:
+    get:
+      operationId: listComments
+      summary: List approved comments
+      description: List approved comments. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site.
+      tags:
+      - Comments
+      responses:
+        '200':
+          description: Success.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection endpoints).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection endpoints).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel=next / rel=prev).
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+        '400':
+          description: Invalid parameter (`rest_invalid_param`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Not permitted anonymously (e.g. `rest_user_cannot_view`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No matching resource or route (`rest_post_invalid_id` / `rest_no_route`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: context
+        in: query
+        required: false
+        description: Scope under which the request is made; determines fields present in response.
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+      - name: page
+        in: query
+        required: false
+        description: Current page of the collection.
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: per_page
+        in: query
+        required: false
+        description: Maximum number of items to be returned in result set.
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 100
+      - name: search
+        in: query
+        required: false
+        description: Limit results to those matching a string.
+        schema:
+          type: string
+      - name: after
+        in: query
+        required: false
+        description: Limit response to comments published after a given ISO8601 compliant date.
+        schema:
+          type: string
+          format: date-time
+      - name: author
+        in: query
+        required: false
+        description: Limit result set to comments assigned to specific user IDs. Requires authorization.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: author_exclude
+        in: query
+        required: false
+        description: Ensure result set excludes comments assigned to specific user IDs. Requires authorization.
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: author_email
+        in: query
+        required: false
+        description: Limit result set to that from a specific author email. Requires authorization.
+        schema:
+          type: string
+          format: email
+      - name: before
+        in: query
+        required: false
+        description: Limit response to comments published before a given ISO8601 compliant date.
+        schema:
+          type: string
+          format: date-time
+      - name: exclude
+        in: query
+        required: false
+        description: Ensure result set excludes specific IDs.
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+      - name: include
+        in: query
+        required: false
+        description: Limit result set to specific IDs.
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+      - name: offset
+        in: query
+        required: false
+        description: Offset the result set by a specific number of items.
+        schema:
+          type: integer
+      - name: order
+        in: query
+        required: false
+        description: Order sort attribute ascending or descending.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+      - name: orderby
+        in: query
+        required: false
+        description: Sort collection by comment attribute.
+        schema:
+          type: string
+          enum:
+          - date
+          - date_gmt
+          - id
+          - include
+          - post
+          - parent
+          - type
+          default: date_gmt
+      - name: parent
+        in: query
+        required: false
+        description: Limit result set to comments of specific parent IDs.
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+      - name: parent_exclude
+        in: query
+        required: false
+        description: Ensure result set excludes specific parent IDs.
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+      - name: post
+        in: query
+        required: false
+        description: Limit result set to comments assigned to specific post IDs.
+        schema:
+          type: array
+          default: []
+          items:
+            type: integer
+      - name: status
+        in: query
+        required: false
+        description: Limit result set to comments assigned a specific status. Requires authorization.
+        schema:
+          type: string
+          default: approve
+      - name: type
+        in: query
+        required: false
+        description: Limit result set to comments assigned a specific type. Requires authorization.
+        schema:
+          type: string
+          default: comment
+      - name: password
+        in: query
+        required: false
+        description: The password for the post if it is password protected.
+        schema:
+          type: string
+components:
+  schemas:
+    Error:
+      type: object
+      description: The WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages (400 only).
+      required:
+      - code
+      - message
+      - data

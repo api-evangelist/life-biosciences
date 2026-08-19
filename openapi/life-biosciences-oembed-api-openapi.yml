@@ -1,0 +1,111 @@
+openapi: 3.2.0
+info:
+  title: Life Biosciences WordPress Content O Embed API
+  version: wp/v2
+  description: 'Read-only content API served anonymously by the WordPress REST API on the Life Biosciences corporate site (www.lifebiosciences.com). It exposes the company''s press releases, news posts, pages (platform, pipeline, leadership, policies), media, taxonomies and site search as JSON.
+
+
+    This is NOT a product API and Life Biosciences publishes no developer program, documentation or SDKs for it. API Evangelist derived this description from the site''s own machine-readable route discovery document at https://www.lifebiosciences.com/wp-json/ (saved verbatim at openapi/_original/life-biosciences-wp-json-index.json). Every path, method and parameter below is copied from that document; only routes verified to answer HTTP 200 anonymously are included. Write methods advertised by WordPress core require authentication and are intentionally omitted.'
+  contact:
+    name: Life Biosciences, Inc.
+    url: https://www.lifebiosciences.com/contact/
+  x-evidence:
+    fetched: '2026-08-04'
+    url: https://www.lifebiosciences.com/wp-json/
+    http_status: 200
+    content_type: application/json
+    note: Derived from the live route discovery document; not published by Life Biosciences as OpenAPI.
+servers:
+- url: https://www.lifebiosciences.com/wp-json
+  description: Production
+tags:
+- name: oEmbed
+paths:
+  /oembed/1.0/embed:
+    get:
+      operationId: getOembed
+      summary: Retrieve the oEmbed representation of a URL on this site
+      description: Retrieve the oEmbed representation of a URL on this site. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site.
+      tags:
+      - oEmbed
+      responses:
+        '200':
+          description: Success.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection endpoints).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection endpoints).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel=next / rel=prev).
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameter (`rest_invalid_param`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Not permitted anonymously (e.g. `rest_user_cannot_view`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: No matching resource or route (`rest_post_invalid_id` / `rest_no_route`).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL of the resource for which to fetch oEmbed data.
+        schema:
+          type: string
+          format: uri
+      - name: format
+        in: query
+        required: false
+        schema:
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        schema:
+          default: 600
+components:
+  schemas:
+    Error:
+      type: object
+      description: The WordPress REST API error envelope, observed live on this host.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route.
+        message:
+          type: string
+          description: Human-readable error message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code.
+            params:
+              type: object
+              description: Per-parameter validation messages (400 only).
+      required:
+      - code
+      - message
+      - data

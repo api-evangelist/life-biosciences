@@ -1,0 +1,38 @@
+{
+  "provider": "life-biosciences",
+  "sources": [
+    "life-biosciences-comments-api-openapi.yml",
+    "life-biosciences-discovery-api-openapi.yml",
+    "life-biosciences-media-api-openapi.yml",
+    "life-biosciences-oembed-api-openapi.yml",
+    "life-biosciences-pages-api-openapi.yml",
+    "life-biosciences-posts-api-openapi.yml",
+    "life-biosciences-search-api-openapi.yml",
+    "life-biosciences-taxonomies-api-openapi.yml"
+  ],
+  "outputs": [
+    "life-biosciences-comments-api-openapi.yml",
+    "life-biosciences-discovery-api-openapi.yml",
+    "life-biosciences-media-api-openapi.yml",
+    "life-biosciences-oembed-api-openapi.yml",
+    "life-biosciences-pages-api-openapi.yml",
+    "life-biosciences-posts-api-openapi.yml",
+    "life-biosciences-search-api-openapi.yml",
+    "life-biosciences-taxonomies-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "life-biosciences-comments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-discovery-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-oembed-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-pages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-posts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "life-biosciences-taxonomies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

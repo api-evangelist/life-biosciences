@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Life Biosciences WordPress Content Discovery API",
+    "version": "wp/v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the content types exposed by the site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.lifebiosciences.com/wp-json/wp/v2/types",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              }
+            ]
+          },
+          "docs": "List the content types exposed by the site. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site."
+        },
+        {
+          "info": {
+            "name": "List the taxonomies exposed by the site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.lifebiosciences.com/wp-json/wp/v2/taxonomies",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to taxonomies associated with a specific post type."
+              }
+            ]
+          },
+          "docs": "List the taxonomies exposed by the site. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site."
+        },
+        {
+          "info": {
+            "name": "List the post statuses exposed by the site",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.lifebiosciences.com/wp-json/wp/v2/statuses",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              }
+            ]
+          },
+          "docs": "List the post statuses exposed by the site. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

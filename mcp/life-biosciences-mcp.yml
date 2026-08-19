@@ -6,17 +6,18 @@ server:
   name: life-biosciences
   transport: http
   url: null
-notes: >-
-  No official or third-party hosted MCP server for Life Biosciences was found (company site, GitHub —
-  no org exists under lifebiosciences/life-biosciences/lifebio — npm, PyPI and the public MCP
-  registries, searched 2026-08-04). The site does expose the WordPress Abilities API namespace
-  (wp-abilities/v1), which is the closest thing to an agent tool surface on this host, but
-  /wp-json/wp-abilities/v1/abilities returns HTTP 401 anonymously, so its tool definitions cannot be
-  introspected and are not reproduced here. The tools below are a CANDIDATE surface derived
-  mechanically from the sixteen verified read operations; no MCP endpoint is implied to exist. Every
-  source_operation was verified against the OpenAPI it names.
+notes: No official or third-party hosted MCP server for Life Biosciences was found (company site, GitHub
+  — no org exists under lifebiosciences/life-biosciences/lifebio — npm, PyPI and the public MCP registries,
+  searched 2026-08-04). The site does expose the WordPress Abilities API namespace (wp-abilities/v1),
+  which is the closest thing to an agent tool surface on this host, but /wp-json/wp-abilities/v1/abilities
+  returns HTTP 401 anonymously, so its tool definitions cannot be introspected and are not reproduced
+  here. The tools below are a CANDIDATE surface derived mechanically from the sixteen verified read operations;
+  no MCP endpoint is implied to exist. Every source_operation was verified against the OpenAPI it names.
 gated_surfaces:
-- {surface: WordPress Abilities API, url: 'https://www.lifebiosciences.com/wp-json/wp-abilities/v1/abilities', http_status: 401, note: 'requires authenticated introspection; no credentials are issued to the public'}
+- surface: WordPress Abilities API
+  url: https://www.lifebiosciences.com/wp-json/wp-abilities/v1/abilities
+  http_status: 401
+  note: requires authenticated introspection; no credentials are issued to the public
 tool_count: 16
 tools:
 - name: list_posts
@@ -67,3 +68,9 @@ tools:
 - name: get_oembed
   description: Retrieve the oEmbed representation of a URL on this site.
   source_operation: openapi/life-biosciences-wordpress-content-openapi.yml#getOembed
+deployment:
+  mode: none
+  verified: derived
+  tools: 16
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -201,6 +201,8 @@ apis:
   humanURL: https://www.lifebiosciences.com/news/
   baseURL: https://www.lifebiosciences.com/wp-json
   tags:
+  - taxonomies
+  tags_raw:
   - Taxonomies
   properties:
   - type: OpenAPI

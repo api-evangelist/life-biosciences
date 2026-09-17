@@ -127,26 +127,6 @@ apis:
     url: data-model/life-biosciences-data-model.yml
   - type: Examples
     url: examples/life-biosciences-wordpress-content-examples.yml
-- aid: life-biosciences:life-biosciences-oembed-api
-  name: Life Biosciences O Embed API
-  description: The oEmbed API from Life Biosciences — 1 operation(s) for oembed.
-  humanURL: https://www.lifebiosciences.com/news/
-  baseURL: https://www.lifebiosciences.com/wp-json
-  tags:
-  - oEmbed
-  properties:
-  - type: OpenAPI
-    url: openapi/life-biosciences-oembed-api-openapi.yml
-  - type: Authentication
-    url: authentication/life-biosciences-authentication.yml
-  - type: Conventions
-    url: conventions/life-biosciences-conventions.yml
-  - type: ErrorCatalog
-    url: errors/life-biosciences-problem-types.yml
-  - type: DataModel
-    url: data-model/life-biosciences-data-model.yml
-  - type: Examples
-    url: examples/life-biosciences-wordpress-content-examples.yml
 - aid: life-biosciences:life-biosciences-pages-api
   name: Life Biosciences Pages API
   description: The Pages API from Life Biosciences — 2 operation(s) for pages.
@@ -219,6 +199,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/life-biosciences-taxonomies-api-openapi.yml
+  - type: Authentication
+    url: authentication/life-biosciences-authentication.yml
+  - type: Conventions
+    url: conventions/life-biosciences-conventions.yml
+  - type: ErrorCatalog
+    url: errors/life-biosciences-problem-types.yml
+  - type: DataModel
+    url: data-model/life-biosciences-data-model.yml
+  - type: Examples
+    url: examples/life-biosciences-wordpress-content-examples.yml
+- aid: life-biosciences:life-biosciences-o-embed-api
+  name: Life Biosciences o Embed API
+  description: The o Embed API from Life Biosciences — 1 operation(s) for o embed.
+  humanURL: https://www.lifebiosciences.com/news/
+  baseURL: https://www.lifebiosciences.com/wp-json
+  tags:
+  - o Embed
+  properties:
+  - type: OpenAPI
+    url: openapi/life-biosciences-o-embed-api-openapi.yml
   - type: Authentication
     url: authentication/life-biosciences-authentication.yml
   - type: Conventions

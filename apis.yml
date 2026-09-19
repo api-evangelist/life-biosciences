@@ -215,6 +215,8 @@ apis:
   humanURL: https://www.lifebiosciences.com/news/
   baseURL: https://www.lifebiosciences.com/wp-json
   tags:
+  - oEmbed
+  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI

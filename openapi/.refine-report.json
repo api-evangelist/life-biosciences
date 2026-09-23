@@ -1,38 +1,37 @@
 {
   "provider": "life-biosciences",
   "sources": [
-    "life-biosciences-comments-api-openapi.yml",
-    "life-biosciences-discovery-api-openapi.yml",
-    "life-biosciences-media-api-openapi.yml",
-    "life-biosciences-oembed-api-openapi.yml",
-    "life-biosciences-pages-api-openapi.yml",
-    "life-biosciences-posts-api-openapi.yml",
-    "life-biosciences-search-api-openapi.yml",
-    "life-biosciences-taxonomies-api-openapi.yml"
+    "_original/life-biosciences-wordpress-content-openapi.yml"
   ],
   "outputs": [
     "life-biosciences-comments-api-openapi.yml",
     "life-biosciences-discovery-api-openapi.yml",
     "life-biosciences-media-api-openapi.yml",
-    "life-biosciences-oembed-api-openapi.yml",
     "life-biosciences-pages-api-openapi.yml",
     "life-biosciences-posts-api-openapi.yml",
     "life-biosciences-search-api-openapi.yml",
-    "life-biosciences-taxonomies-api-openapi.yml"
+    "life-biosciences-taxonomies-api-openapi.yml",
+    "life-biosciences-oembed-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "life-biosciences-comments-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-discovery-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-oembed-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-pages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-posts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "life-biosciences-taxonomies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "life-biosciences-wordpress-content-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: life-biosciences-o-embed-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 8 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "life-biosciences-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-discovery-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-media-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-o-embed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-pages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-posts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "life-biosciences-taxonomies-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

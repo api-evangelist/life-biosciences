@@ -2,10 +2,7 @@ openapi: 3.2.0
 info:
   title: Life Biosciences WordPress Content O Embed API
   version: wp/v2
-  description: 'Read-only content API served anonymously by the WordPress REST API on the Life Biosciences corporate site (www.lifebiosciences.com). It exposes the company''s press releases, news posts, pages (platform, pipeline, leadership, policies), media, taxonomies and site search as JSON.
-
-
-    This is NOT a product API and Life Biosciences publishes no developer program, documentation or SDKs for it. API Evangelist derived this description from the site''s own machine-readable route discovery document at https://www.lifebiosciences.com/wp-json/ (saved verbatim at openapi/_original/life-biosciences-wp-json-index.json). Every path, method and parameter below is copied from that document; only routes verified to answer HTTP 200 anonymously are included. Write methods advertised by WordPress core require authentication and are intentionally omitted.'
+  description: Read-only content API served anonymously by the WordPress REST API on the Life Biosciences corporate site (www.lifebiosciences.com).
   contact:
     name: Life Biosciences, Inc.
     url: https://www.lifebiosciences.com/contact/
@@ -19,7 +16,7 @@ servers:
 - url: https://www.lifebiosciences.com/wp-json
   description: Production
 tags:
-- name: oEmbed
+- name: o Embed
 paths:
   /oembed/1.0/embed:
     get:
@@ -27,7 +24,7 @@ paths:
       summary: Retrieve the oEmbed representation of a URL on this site
       description: Retrieve the oEmbed representation of a URL on this site. Read-only; served anonymously by the WordPress REST API on the Life Biosciences corporate site.
       tags:
-      - oEmbed
+      - o Embed
       responses:
         '200':
           description: Success.

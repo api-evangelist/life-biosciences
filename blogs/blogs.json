@@ -12,7 +12,7 @@
       "source": "https://www.lifebiosciences.com/feed/",
       "feed_url": "https://www.lifebiosciences.com/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -30,6 +30,6 @@
       "method": "feed"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 10,
+  "fetched": "2026-10-17T14:53:57Z"
 }
